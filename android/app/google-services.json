@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "178052015383",
+    "project_id": "chating-app-d1420",
+    "storage_bucket": "chating-app-d1420.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178052015383:android:1831f273967ba4113b4352",
+        "android_client_info": {
+          "package_name": "com.example.hay_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178052015383-724oio0n9t4rk7mt2p9o921lh2ujr5nt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmNHmv5J5XUlbU2eRDm7gX6wiZa_mnXHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178052015383-724oio0n9t4rk7mt2p9o921lh2ujr5nt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
