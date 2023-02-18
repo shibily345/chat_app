@@ -21,7 +21,7 @@ class UserStore extends GetxController {
     var proffileOffline = StorageService.to.getString(STORAGE_USER_TOKEN_KEY);
     if (proffileOffline.isNotEmpty) {
       _isLogin.value = true;
-      _profile(UserItem.FromJson(jsonDecode(proffileOffline)));
+      _profile(UserItem.fromJson(jsonDecode(proffileOffline)));
     }
   }
 

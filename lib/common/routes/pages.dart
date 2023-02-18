@@ -6,6 +6,7 @@ import 'package:hay_chat/pages/frame/signin/view.dart';
 import 'package:hay_chat/pages/frame/welcome/index.dart';
 import 'package:hay_chat/pages/message/index.dart';
 import 'package:hay_chat/pages/frame/signin/bindings.dart';
+import 'package:hay_chat/pages/profile/index.dart';
 
 class AppPages {
   static const INITIAL = AppRouts.INITIAL;
@@ -26,6 +27,11 @@ class AppPages {
         name: AppRouts.Sign_In,
         page: () => SignInPage(),
         binding: SignInBinding(),
-        middlewares: [RoutAuthMiddleware(priority: 1)])
+        middlewares: [RoutAuthMiddleware(priority: 1)]),
+    GetPage(
+      name: AppRouts.Profile,
+      page: () => ProfilePage(),
+      binding: ProfilePageBinding(),
+    )
   ];
 }

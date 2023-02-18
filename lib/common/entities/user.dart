@@ -15,7 +15,7 @@ class UserItem {
     this.online,
     this.type,
   });
-  factory UserItem.FromJson(Map<String, dynamic> json) => UserItem(
+  factory UserItem.fromJson(Map<String, dynamic> json) => UserItem(
         access_token: json["access_token"],
         token: json["token"],
         name: json["name"],

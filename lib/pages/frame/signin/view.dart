@@ -60,7 +60,7 @@ class SignInPage extends GetView<SignInController> {
                         ),
                         textWidget(
                             text: 'All Ready Have an Account?', color: white),
-                        _buildSignin(onPressed: () {}, title: 'LOG IN', context)
+                        SpButton(onPressed: () {}, title: 'LOG IN', context)
                       ],
                     ),
                   ),
@@ -100,15 +100,6 @@ class SignInPage extends GetView<SignInController> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(35),
-        // color: Colors.white,
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: Colors.grey.withOpacity(0.5),
-        //     spreadRadius: 5,
-        //     blurRadius: 7,
-        //     offset: Offset(0, 3),
-        //   ),
-        // ],
       ),
       width: 350,
       height: height,
@@ -156,40 +147,6 @@ class SignInPage extends GetView<SignInController> {
               ),
               textWidget(text: text, color: white)
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSignin(
-    BuildContext context, {
-    required String title,
-    required Function onPressed,
-  }) {
-    return InkWell(
-      onTap: () => onPressed,
-      child: Container(
-        margin: const EdgeInsets.only(top: 10),
-        height: 50,
-        width: 150,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 10,
-              offset: const Offset(10, 10),
-              color: Theme.of(context).splashColor,
-            ),
-          ],
-          gradient: const LinearGradient(
-              colors: [sgreen, blue],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight),
-          borderRadius: BorderRadius.circular(30),
-        ),
-        child: Center(
-          child: textWidget(
-            text: title,
           ),
         ),
       ),
