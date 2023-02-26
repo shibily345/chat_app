@@ -10,10 +10,9 @@ class RoutAuthMiddleware extends GetMiddleware {
   RoutAuthMiddleware({required this.priority});
   @override
   RouteSettings? redirect(String? route) {
-    if (route == AppRouts.INITIAL ||
+    if (UserStore.to.isLogin ||
         route == AppRouts.Sign_In ||
-        UserStore.to.isLogin ||
-        route == AppRouts.Message) {
+        route == AppRouts.INITIAL) {
       return null;
     } else {
       Future.delayed(
