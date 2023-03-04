@@ -20,7 +20,7 @@ class UserStore extends GetxController {
   bool get isLogin => _isLogin.value;
   UserItem get profile => _profile.value;
   bool get hasToken => token.isNotEmpty;
-
+  set setIsLogin(login) => _isLogin.value = login;
   @override
   void onInit() {
     super.onInit();

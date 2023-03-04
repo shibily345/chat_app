@@ -7,6 +7,7 @@ import 'global.dart';
 
 Future<void> main() async {
   await Globel.init();
+
   runApp(const MyApp());
 }
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      builder: EasyLoading.init(),
     );
   }
 }

@@ -57,7 +57,7 @@ class SignInController {
   asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
     // var respones = await HttpUtil().get('/api/index');
     // print(respones);
-    // UserStore.to.setIslogin = true;
+    UserStore.to.setIsLogin = true;
     EasyLoading.show(
         indicator: const CircularProgressIndicator(),
         maskType: EasyLoadingMaskType.clear,

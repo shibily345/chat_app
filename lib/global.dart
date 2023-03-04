@@ -10,10 +10,10 @@ import 'common/store/storage.dart';
 class Globel {
   static Future init() async {
     WidgetsFlutterBinding.ensureInitialized();
+
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);
     await Get.putAsync<StorageService>(() => StorageService().init());
     Get.put<UserStore>(UserStore());
-    EasyLoading.init();
   }
 }

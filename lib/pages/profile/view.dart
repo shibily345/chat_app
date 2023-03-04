@@ -20,7 +20,7 @@ class ProfilePage extends GetView<ProfilePageController> {
                 image: AssetImage(
                   'assets/bg1.png',
                 ))),
-        child: Column(
+        child: ListView(
           children: [
             SizedBox(
               height: 60,
