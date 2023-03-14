@@ -1,4 +1,4 @@
-library Welcome;
+library Chat;
 
 export './state.dart';
 export './controller.dart';

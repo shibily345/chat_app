@@ -8,6 +8,11 @@ import 'package:hay_chat/pages/message/index.dart';
 import 'package:hay_chat/pages/frame/signin/bindings.dart';
 import 'package:hay_chat/pages/profile/index.dart';
 
+import '../../pages/contacts/bindings.dart';
+import '../../pages/contacts/view.dart';
+import '../../pages/message/chat/bindings.dart';
+import '../../pages/message/chat/view.dart';
+
 class AppPages {
   static const INITIAL = AppRouts.INITIAL;
   static final RouteObserver<Route> observer = RouteObserver();
@@ -32,6 +37,16 @@ class AppPages {
       name: AppRouts.Profile,
       page: () => ProfilePage(),
       binding: ProfilePageBinding(),
+    ),
+    GetPage(
+      name: AppRouts.Contact,
+      page: () => ContactPage(),
+      binding: ContactBinding(),
+    ),
+    GetPage(
+      name: AppRouts.Chat,
+      page: () => ChatPage(),
+      binding: ChatBinding(),
     )
   ];
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hay_chat/common/colors.dart';
 import 'package:hay_chat/common/values/colors.dart';
+import 'package:iconsax/iconsax.dart';
 
 Widget textWidget(
     {required String text,
@@ -13,8 +14,12 @@ Widget textWidget(
     Color color = Colors.black}) {
   return Text(
     text,
+    overflow: TextOverflow.clip,
     style: GoogleFonts.firaSans(
-        fontSize: fontSize, fontWeight: fontWeight, color: color),
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: color,
+    ),
   );
 }
 
@@ -66,5 +71,18 @@ Widget BlurContainer(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Container(color: Colors.white.withOpacity(0.2), child: items),
         )),
+  );
+}
+
+AppBar buildAppar(Widget leading, String title, Widget end) {
+  return AppBar(
+    foregroundColor: Colors.black,
+    elevation: 0,
+    backgroundColor: Colors.transparent,
+    leading: leading,
+    title: Text(
+      title,
+    ),
+    actions: [end],
   );
 }

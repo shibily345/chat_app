@@ -181,18 +181,18 @@ packages:
     dependency: "direct main"
     description:
       name: dio
-      sha256: "9fdbf71baeb250fc9da847f6cb2052196f62c19906a3657adfc18631a667d316"
+      sha256: "3709d74615bba5e443eb141f6a7f4bcc4788f8fae6f743edadfb79c2a8e6287e"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.0"
+    version: "5.0.1"
   dio_cookie_manager:
     dependency: "direct main"
     description:
       name: dio_cookie_manager
-      sha256: "66d58244d0874ce96e0919e3f2dd712d6b39bbe408fc6846dbd46a1371c414a7"
+      sha256: b9552ab77e361acd56e00671a3fd424abe8447aa0a14b68bec55833351d139b4
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   dots_indicator:
     dependency: "direct main"
     description:
@@ -374,6 +374,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.5"
+  flutter_icons_plus:
+    dependency: "direct main"
+    description:
+      name: flutter_icons_plus
+      sha256: "4c432c6f6a12e0648667d0de46be8f1e537678d747307b53f5a2f49be23b98ea"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -549,6 +557,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  iconsax:
+    dependency: "direct main"
+    description:
+      name: iconsax
+      sha256: fb0144c61f41f3f8a385fadc27783ea9f5359670be885ed7f35cef32565d5228
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.8"
   image_picker:
     dependency: "direct main"
     description:

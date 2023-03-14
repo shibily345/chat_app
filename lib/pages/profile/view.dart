@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../../common/colors.dart';
 import '../../common/widgets.dart';
@@ -12,104 +13,133 @@ class ProfilePage extends GetView<ProfilePageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                  'assets/bg1.png',
-                ))),
-        child: ListView(
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 250, 252, 251),
+              Color.fromARGB(255, 17, 172, 233),
+            ],
+            begin: const FractionalOffset(0.0, 1.0),
+            end: const FractionalOffset(1.0, 0.0),
+            stops: [0.0, 1.0],
+            tileMode: TileMode.clamp),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: buildAppar(
+          IconButton(
+            icon: Icon(
+              Iconsax.arrow_left_1,
+              size: 25,
+            ),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+          '',
+          IconButton(
+            icon: Icon(
+              Iconsax.setting,
+              size: 25,
+            ),
+            onPressed: () {},
+          ),
+        ),
+        body: ListView(
           children: [
-            SizedBox(
-              height: 60,
+            const SizedBox(
+              height: 10,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.arrow_back,
-                    size: 30,
-                  ),
-                  Spacer(),
-                  Icon(
-                    Icons.settings,
-                    size: 30,
-                  )
-                ],
-              ),
+            _buildProfileDetiles(context),
+            const SizedBox(
+              height: 300,
             ),
-            SizedBox(
-              height: 30,
-            ),
-            Center(
-              child: BlurContainer(
-                  context,
-                  200,
-                  Center(
-                    child: Stack(
-                      children: [
-                        Container(
-                          height: 115,
-                          width: 115,
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                                colors: [sgreen, blue],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight),
-                            shape: BoxShape.circle,
-                          ),
-                          child:
-                              controller.state.Profile_pic.value.avatar == null
-                                  ? Icon(
-                                      Icons.person,
-                                      size: 90,
-                                    )
-                                  : textWidget(text: 'hi'),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: GestureDetector(
-                            child: CircleAvatar(
-                              radius: 18,
-                              child: Icon(Icons.camera_alt),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            BlurContainer(
-                context,
-                300,
-                CustomScrollView(
-                  slivers: [],
-                )),
-            SizedBox(
-              height: 40,
-            ),
-            BlurContainer(
-                context,
-                150,
-                Center(
+            Container(
+                child: Center(
                     child: SpButton(context, title: "Logout", onPressed: () {
-                  Get.defaultDialog(
-                      title: "Sre you Sure to log out?",
-                      content: Container(),
-                      onConfirm: controller.goLogout,
-                      textConfirm: "Yes",
-                      textCancel: "No");
-                })))
+              Get.defaultDialog(
+                  title: "Sre you Sure to log out?",
+                  content: Container(),
+                  onConfirm: controller.goLogout,
+                  textConfirm: "Yes",
+                  textCancel: "No");
+            })))
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildProfileDetiles(BuildContext context) {
+    return Center(
+      child: BlurContainer(
+          context,
+          200,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Center(
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 100,
+                      width: 100,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [sgreen, blue],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight),
+                        shape: BoxShape.circle,
+                      ),
+                      child: controller.state.Profile_pic.value.avatar == null
+                          ? const Icon(
+                              Icons.person,
+                              size: 70,
+                            )
+                          : textWidget(text: 'hi'),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: GestureDetector(
+                        child: const CircleAvatar(
+                          radius: 18,
+                          child: Icon(Iconsax.camera),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 100,
+                width: 180,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    textWidget(
+                      text: 'Mohamed Shibily',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    textWidget(
+                      text: 'Modesty Brings Happy ',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Icon(Iconsax.edit)
+                  ],
+                ),
+              )
+            ],
+          )),
     );
   }
 }

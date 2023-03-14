@@ -10,8 +10,6 @@ import 'package:hay_chat/common/entities/user.dart';
 import 'package:hay_chat/common/routes/names.dart';
 import 'package:hay_chat/common/store/user.dart';
 import 'package:hay_chat/pages/frame/signin/state.dart';
-
-import '../../../common/util/http.dart';
 import '../../../common/widgets/toast.dart';
 
 class SignInController {
@@ -57,19 +55,21 @@ class SignInController {
   asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
     // var respones = await HttpUtil().get('/api/index');
     // print(respones);
-    UserStore.to.setIsLogin = true;
+
     EasyLoading.show(
         indicator: const CircularProgressIndicator(),
         maskType: EasyLoadingMaskType.clear,
         dismissOnTap: true);
     var result = await UserAPI.Login(params: loginRequestEntity);
-    if (result == 0) {
+    if (result.code == 0) {
       await UserStore.to.saveProfile(result.data!);
       EasyLoading.dismiss();
     } else {
       EasyLoading.dismiss();
-      toastInfo(msg: "internal error");
+
+      toastInfo(msg: "internet error");
     }
+
     Get.offAllNamed(AppRouts.Message);
   }
 }

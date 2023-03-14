@@ -47,6 +47,7 @@ class HttpUtil {
 
     dio = new Dio(options);
 
+    // ignore: deprecated_member_use
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -174,7 +175,7 @@ class HttpUtil {
     token.cancel("cancelled");
   }
 
-  /// 读取本地配置
+  ///
   Map<String, dynamic>? getAuthorizationHeader() {
     var headers = <String, dynamic>{};
     if (Get.isRegistered<UserStore>() && UserStore.to.hasToken == true) {
@@ -194,9 +195,10 @@ class HttpUtil {
     bool cacheDisk = false,
   }) async {
     Options requestOptions = options ?? Options();
-    if (requestOptions.extra == null) {
-      requestOptions.extra = Map();
-    }
+    // if (requestOptions.extra == null) {
+    //   requestOptions.extra = Map();
+    // }
+    requestOptions.extra ??= Map();
     requestOptions.extra!.addAll({
       "refresh": refresh,
       "noCache": noCache,

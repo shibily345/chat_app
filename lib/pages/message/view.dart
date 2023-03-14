@@ -12,6 +12,12 @@ class MessagePage extends GetView<MessageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          controller.goContact();
+        },
+        child: Icon(Iconsax.message_add),
+      ),
       body: Stack(
         children: [
           CustomScrollView(
@@ -20,7 +26,7 @@ class MessagePage extends GetView<MessageController> {
                 backgroundColor: Colors.transparent,
                 pinned: true,
                 title: _headBar(context),
-              )
+              ),
             ],
           ),
         ],

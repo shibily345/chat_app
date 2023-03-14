@@ -25,14 +25,14 @@ class ConfigStore extends GetxController {
   void onInit() {
     super.onInit();
 
-    ///  isFirstOpen = StorageService.to.getBool(STORAGE_DEVICE_FIRST_OPEN_KEY);
+    /// isFirstOpen = StorageService.to.getBool(STORAGE_DEVICE_FIRST_OPEN_KEY);
   }
 
   Future<void> getPlatform() async {
     _platform = await PackageInfo.fromPlatform();
   }
 
-  // 标记用户已打开APP
+  //
   Future<bool> saveAlreadyOpen() {
     return StorageService.to.setBool(STORAGE_DEVICE_FIRST_OPEN_KEY, true);
   }
