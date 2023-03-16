@@ -60,10 +60,11 @@ Widget SpButton(
 Widget BlurContainer(
   BuildContext context,
   double height,
+  double width,
   Widget items,
 ) {
   return Container(
-    width: 380,
+    width: width,
     height: height,
     child: ClipRRect(
         borderRadius: BorderRadius.circular(25),
@@ -74,15 +75,18 @@ Widget BlurContainer(
   );
 }
 
-AppBar buildAppar(Widget leading, String title, Widget end) {
+AppBar buildAppar(Widget leading, Widget title, Widget end, Color color) {
   return AppBar(
     foregroundColor: Colors.black,
     elevation: 0,
-    backgroundColor: Colors.transparent,
+    backgroundColor: color,
     leading: leading,
-    title: Text(
-      title,
-    ),
-    actions: [end],
+    title: title,
+    actions: [
+      end,
+      SizedBox(
+        width: 20,
+      )
+    ],
   );
 }

@@ -12,6 +12,8 @@ import '../../pages/contacts/bindings.dart';
 import '../../pages/contacts/view.dart';
 import '../../pages/message/chat/bindings.dart';
 import '../../pages/message/chat/view.dart';
+import '../../pages/message/voicecall/bindings.dart';
+import '../../pages/message/voicecall/view.dart';
 
 class AppPages {
   static const INITIAL = AppRouts.INITIAL;
@@ -47,6 +49,11 @@ class AppPages {
       name: AppRouts.Chat,
       page: () => ChatPage(),
       binding: ChatBinding(),
+    ),
+    GetPage(
+      name: AppRouts.VoiceCall,
+      page: () => VoiceCallPage(),
+      binding: VoiceCallBinding(),
     )
   ];
 }

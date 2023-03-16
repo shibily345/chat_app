@@ -59,7 +59,7 @@ class ContactList extends GetView<ContactController> {
           ),
           Container(
             height: 60,
-            width: 325,
+            width: Get.width * 0.7,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,

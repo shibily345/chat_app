@@ -37,7 +37,7 @@ class ProfilePage extends GetView<ProfilePageController> {
               Get.back();
             },
           ),
-          '',
+          textWidget(text: ''),
           IconButton(
             icon: Icon(
               Iconsax.setting,
@@ -45,6 +45,7 @@ class ProfilePage extends GetView<ProfilePageController> {
             ),
             onPressed: () {},
           ),
+          Colors.transparent,
         ),
         body: ListView(
           children: [
@@ -76,6 +77,7 @@ class ProfilePage extends GetView<ProfilePageController> {
       child: BlurContainer(
           context,
           200,
+          380,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
