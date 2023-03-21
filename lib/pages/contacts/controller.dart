@@ -14,7 +14,6 @@ import '../../common/entities/contact.dart';
 class ContactController extends GetxController {
   ContactController();
 
-  final title = "HowAreYou .";
   final state = ContactState();
   final token = UserStore.to.profile.token;
   final db = FirebaseFirestore.instance;
@@ -70,7 +69,7 @@ class ContactController extends GetxController {
               fromFirestore: Msg.fromFirestore,
               toFirestore: (Msg msg, options) => msg.toFirestore())
           .add(msgdata);
-      Get.offAllNamed("/chat", parameters: {
+      Get.toNamed("/chat", parameters: {
         "doc_id": doc_id.id,
         "to_token": contactItem.token ?? "",
         "to_name": contactItem.name ?? "",

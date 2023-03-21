@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hay_chat/common/colors.dart';
 import 'package:hay_chat/common/widgets.dart';
@@ -14,16 +15,27 @@ class WelcomePage extends GetView<WelcomeController> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage(
-                  'assets/bg.png',
+                  'assets/bwbg1.png',
                 ))),
         child: Center(
-          child: Text(
-            title,
-            style: const TextStyle(
-                color: Colors.white,
-                fontFamily: "Montserrat",
-                fontWeight: FontWeight.bold,
-                fontSize: 45),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 100,
+                child: SvgPicture.asset(
+                  'assets/HAYlogo.svg',
+                ),
+              ),
+              Text(
+                title,
+                style: const TextStyle(
+                    color: Colors.grey,
+                    fontFamily: "Montserrat",
+                    fontWeight: FontWeight.bold,
+                    fontSize: 45),
+              ),
+            ],
           ),
         ));
   }

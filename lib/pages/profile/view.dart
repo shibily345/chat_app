@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -99,7 +100,17 @@ class ProfilePage extends GetView<ProfilePageController> {
                               Icons.person,
                               size: 70,
                             )
-                          : textWidget(text: 'hi'),
+                          : CachedNetworkImage(
+                              imageUrl:
+                                  controller.state.Profile_pic.value.avatar!,
+                              imageBuilder: (context, ImageProvider) =>
+                                  CircleAvatar(
+                                radius: 25,
+                                backgroundImage: ImageProvider,
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Iconsax.man),
+                            ),
                     ),
                     Positioned(
                       bottom: 0,

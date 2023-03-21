@@ -12,6 +12,8 @@ import '../../pages/contacts/bindings.dart';
 import '../../pages/contacts/view.dart';
 import '../../pages/message/chat/bindings.dart';
 import '../../pages/message/chat/view.dart';
+import '../../pages/message/videoCall/bindings.dart';
+import '../../pages/message/videoCall/view.dart';
 import '../../pages/message/voicecall/bindings.dart';
 import '../../pages/message/voicecall/view.dart';
 
@@ -54,6 +56,11 @@ class AppPages {
       name: AppRouts.VoiceCall,
       page: () => VoiceCallPage(),
       binding: VoiceCallBinding(),
-    )
+    ),
+    GetPage(
+      name: AppRouts.VideoCall,
+      page: () => VideoCallPage(),
+      binding: VideoCallBinding(),
+    ),
   ];
 }

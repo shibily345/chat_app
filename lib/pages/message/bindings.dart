@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:hay_chat/pages/contacts/controller.dart';
 
 import 'controller.dart';
 

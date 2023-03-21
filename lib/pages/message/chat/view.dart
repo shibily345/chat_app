@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hay_chat/common/routes/routes.dart';
+import 'package:hay_chat/pages/message/chat/widget/chat_list.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'package:hay_chat/common/colors.dart';
@@ -16,38 +17,17 @@ import 'controller.dart';
 
 class ChatPage extends GetView<ChatController> {
   const ChatPage({super.key});
-  Widget _buildPageTitle(String title) {
-    return Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                  'assets/bg.png',
-                ))),
-        child: Center(
-          child: Text(
-            title,
-            style: const TextStyle(
-                color: Colors.white,
-                fontFamily: "Montserrat",
-                fontWeight: FontWeight.bold,
-                fontSize: 45),
-          ),
-        ));
-  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/whitebg.jpg"), fit: BoxFit.cover)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: _buildAppBar(),
         body: Obx(
           () => SafeArea(
             child: Stack(children: [
+              ChatList(),
               Positioned(
                 bottom: 20,
                 left: 25,
@@ -73,9 +53,12 @@ class ChatPage extends GetView<ChatController> {
                                   child: Row(
                                     children: [
                                       Container(
-                                        padding: EdgeInsets.only(top: 10),
+                                        padding:
+                                            EdgeInsets.only(top: 10, left: 10),
                                         width: Get.width * 0.6,
-                                        child: const TextField(
+                                        child: TextField(
+                                          cursorColor: black,
+                                          controller: controller.textController,
                                           decoration: InputDecoration(
                                               hintText: 'Message...',
                                               focusedBorder: OutlineInputBorder(
@@ -88,7 +71,9 @@ class ChatPage extends GetView<ChatController> {
                                       ),
                                       Spacer(),
                                       IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          controller.sendMessage();
+                                        },
                                         icon: Icon(Iconsax.send_2),
                                       ),
                                     ],
@@ -114,12 +99,15 @@ class ChatPage extends GetView<ChatController> {
                   ? Positioned(
                       right: 20,
                       bottom: 70,
-                      height: 230,
+                      height: 280,
                       width: 40,
                       child: Column(
                         children: [
                           BuildaddIcons(
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.imageFromGallery();
+                              // Get.back();
+                            },
                             icon: Iconsax.folder_open,
                           ),
                           BuildaddIcons(
@@ -131,6 +119,12 @@ class ChatPage extends GetView<ChatController> {
                               controller.goVoiceCall();
                             },
                             icon: Iconsax.call_add,
+                          ),
+                          BuildaddIcons(
+                            onPressed: () {
+                              controller.goVideoCall();
+                            },
+                            icon: Iconsax.video,
                           ),
                           BuildaddIcons(
                             onPressed: () {},

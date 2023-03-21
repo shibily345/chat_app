@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:hay_chat/common/routes/names.dart';
+import 'package:hay_chat/pages/message/videoCall/state.dart';
 
 import 'package:hay_chat/pages/message/voicecall/state.dart';
 import 'package:just_audio/just_audio.dart';
@@ -12,10 +13,10 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../../common/store/user.dart';
 import '../../../common/values/server.dart';
 
-class VoiceCallController extends GetxController {
-  VoiceCallController();
+class VideoCallController extends GetxController {
+  VideoCallController();
 
-  final state = VoiceCallState();
+  final state = VideoCallState();
   final player = AudioPlayer();
   String appid = APPID;
   final db = FirebaseFirestore.instance;
@@ -51,6 +52,7 @@ class VoiceCallController extends GetxController {
       onUserJoined:
           (RtcConnection connection, int remoteUid, int elasped) async {
         await player.pause();
+        state.remoteUid.value = remoteUid;
       },
       onLeaveChannel: (RtcConnection connection, RtcStats stats) async {
         print('.........user left..............');
@@ -61,7 +63,10 @@ class VoiceCallController extends GetxController {
         print(stats.duration);
       },
     ));
+    await [Permission.microphone, Permission.camera].request();
+    await engine.enableVideo();
     await engine.enableAudio();
+    await engine.startPreview();
     await engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
     await engine.setAudioProfile(
         profile: AudioProfileType.audioProfileDefault,
@@ -70,7 +75,6 @@ class VoiceCallController extends GetxController {
   }
 
   Future<void> joinChannel() async {
-    await Permission.microphone.request();
     EasyLoading.show(
         indicator: CircularProgressIndicator(),
         maskType: EasyLoadingMaskType.clear,
