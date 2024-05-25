@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../values/colors.dart';
 import '../values/radii.dart';
 
@@ -18,12 +16,12 @@ Widget btnFlatButtonWidget({
   FontWeight fontWeight = FontWeight.w400,
 }) {
   return Container(
-    width: width.w,
-    height: height.h,
+    width: width,
+    height: height,
     child: TextButton(
       style: ButtonStyle(
         textStyle: MaterialStateProperty.all(TextStyle(
-          fontSize: 16.sp,
+          fontSize: 16,
         )),
         foregroundColor: MaterialStateProperty.resolveWith(
           (states) {
@@ -52,7 +50,7 @@ Widget btnFlatButtonWidget({
         style: TextStyle(
           color: fontColor,
           fontWeight: fontWeight,
-          fontSize: fontSize.sp,
+          fontSize: fontSize,
           height: 1,
         ),
       ),
@@ -69,12 +67,12 @@ Widget btnFlatButtonBorderOnlyWidget({
   required String iconFileName,
 }) {
   return Container(
-    width: width.w,
-    height: height.h,
+    width: width,
+    height: height,
     child: TextButton(
       style: ButtonStyle(
         // textStyle: MaterialStateProperty.all(TextStyle(
-        //   fontSize: 16.sp,
+        //   fontSize: 16 ,
         // )),
         // foregroundColor: MaterialStateProperty.resolveWith(
         //   (states) {

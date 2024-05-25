@@ -24,20 +24,14 @@ class HttpUtil {
   CancelToken cancelToken = new CancelToken();
 
   HttpUtil._internal() {
-    // BaseOptions、Options、RequestOptions 都可以配置参数，优先级别依次递增，且可以根据优先级别覆盖参数
     // ignore: unnecessary_new
     BaseOptions options = new BaseOptions(
-      // 请求基地址,可以包含子路径
       baseUrl: SERVER_API_URL,
 
       // baseUrl: storage.read(key: STORAGE_KEY_APIURL) ?? SERVICE_API_BASEURL,
 
       connectTimeout: 100000.seconds,
-
-      // 响应流上前后两次接受到数据的间隔，单位为毫秒。
       receiveTimeout: 5000.seconds,
-
-      // Http请求头.
       headers: {},
 
       contentType: 'application/json; charset=utf-8',
@@ -68,8 +62,6 @@ class HttpUtil {
       onResponse: (response, handler) {
         // Do something with response data
         return handler.next(response); // continue
-        // 如果你想终止请求并触发一个错误,你可以 reject 一个`DioError`对象,如`handler.reject(error)`，
-        // 这样请求将被中止并触发异常，上层catchError会被调用。
       },
       onError: (DioError e, handler) {
         // Do something with response error
@@ -77,8 +69,6 @@ class HttpUtil {
         ErrorEntity eInfo = createErrorEntity(e);
         onError(eInfo);
         return handler.next(e); //continue
-        // 如果你想完成请求并返回一些自定义数据，可以resolve 一个`Response`,如`handler.resolve(response)`。
-        // 这样请求将会被终止，上层then会被调用，then中返回的数据将是你的自定义response.
       },
     ));
   }
@@ -99,7 +89,7 @@ class HttpUtil {
         EasyLoading.showError(eInfo.message);
         break;
       default:
-        EasyLoading.showError('未知错误');
+        EasyLoading.showError('unknown error');
         break;
     }
   }
@@ -108,15 +98,15 @@ class HttpUtil {
   ErrorEntity createErrorEntity(DioError error) {
     switch (error.type) {
       case DioErrorType.cancel:
-        return ErrorEntity(code: -1, message: "请求取消");
+        return ErrorEntity(code: -1, message: "Request cancellation");
       case DioErrorType.connectionTimeout:
-        return ErrorEntity(code: -1, message: "连接超时");
+        return ErrorEntity(code: -1, message: "Connection timed out");
       case DioErrorType.sendTimeout:
-        return ErrorEntity(code: -1, message: "请求超时");
+        return ErrorEntity(code: -1, message: "Request timed out");
       case DioErrorType.receiveTimeout:
-        return ErrorEntity(code: -1, message: "响应超时");
+        return ErrorEntity(code: -1, message: "Response timeout");
       case DioErrorType.cancel:
-        return ErrorEntity(code: -1, message: "请求取消");
+        return ErrorEntity(code: -1, message: "Request cancellation");
       case DioErrorType.badResponse:
         {
           try {
@@ -126,23 +116,31 @@ class HttpUtil {
             // return ErrorEntity(code: errCode, message: errMsg);
             switch (errCode) {
               case 400:
-                return ErrorEntity(code: errCode, message: "请求语法错误");
+                return ErrorEntity(
+                    code: errCode, message: "Request syntax error");
               case 401:
-                return ErrorEntity(code: errCode, message: "没有权限");
+                return ErrorEntity(code: errCode, message: "permission denied");
               case 403:
-                return ErrorEntity(code: errCode, message: "服务器拒绝执行");
+                return ErrorEntity(
+                    code: errCode, message: "Server refuses to execute");
               case 404:
-                return ErrorEntity(code: errCode, message: "无法连接服务器");
+                return ErrorEntity(
+                    code: errCode, message: "can not reach server");
               case 405:
-                return ErrorEntity(code: errCode, message: "请求方法被禁止");
+                return ErrorEntity(
+                    code: errCode, message: "Request method is forbidden");
               case 500:
-                return ErrorEntity(code: errCode, message: "服务器内部错误");
+                return ErrorEntity(
+                    code: errCode, message: "Server internal error");
               case 502:
-                return ErrorEntity(code: errCode, message: "无效的请求");
+                return ErrorEntity(code: errCode, message: "Invalid request");
               case 503:
-                return ErrorEntity(code: errCode, message: "服务器挂了");
+                return ErrorEntity(
+                    code: errCode, message: "The server is down");
               case 505:
-                return ErrorEntity(code: errCode, message: "不支持HTTP协议请求");
+                return ErrorEntity(
+                    code: errCode,
+                    message: "HTTP protocol requests are not supported");
               default:
                 {
                   // return ErrorEntity(code: errCode, message: "未知错误");
@@ -155,7 +153,7 @@ class HttpUtil {
                 }
             }
           } on Exception catch (_) {
-            return ErrorEntity(code: -1, message: "未知错误");
+            return ErrorEntity(code: -1, message: "unknown mistake");
           }
         }
       default:

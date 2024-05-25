@@ -1,6 +1,6 @@
 // baidu yapi
-const SERVER_API_URL = 'http://192.168.100.38:8000/';
-const APPID = "bb1369bdff3b4fa3b609e7be660d2e5c";
+const SERVER_API_URL = 'http://192.168.100.30:8000/';
+const APPID = "63f6cd1f273b4f22935e958b6d63439c";
 
 //  yapi
 // const SERVER_API_URL = 'http://yapi.ducafecat.tech/mock/11';

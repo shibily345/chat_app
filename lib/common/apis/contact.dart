@@ -5,7 +5,7 @@ class ContactAPI {
   /// refresh
   static Future<ContactResponseEntity> post_contact() async {
     var response = await HttpUtil().post(
-      'api/contact',
+      'api/v1/chat/contact',
     );
     return ContactResponseEntity.fromJson(response);
   }

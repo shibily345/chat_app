@@ -16,111 +16,85 @@ class MessagePage extends GetView<MessageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).splashColor,
         // bottomNavigationBar: NavBar(),
-        appBar: _appBar(context),
+
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             controller.goContact();
           },
           child: Icon(Iconsax.message_add),
         ),
-        body: MessageList());
-  }
-
-  AppBar _appBar(BuildContext context) {
-    return buildAppar(
-        GestureDetector(
-            onTap: () {
-              controller.goProfile();
-            },
-            child: Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Container(
-                height: 55,
-                width: 55,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      spreadRadius: 5,
-                      blurRadius: 10,
-                      offset: const Offset(0, 1),
-                      color: Theme.of(context).splashColor,
-                    ),
-                  ],
-                  gradient: const LinearGradient(
-                      colors: [sgreen, blue],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight),
-                  shape: BoxShape.circle,
-                ),
-                child: controller.state.head_detail.value.avatar == null
-                    ? Icon(
-                        Icons.person,
-                        size: 30,
-                      )
-                    : Image.network(
-                        "${controller.state.head_detail.value.avatar}"),
+        body: SafeArea(
+          child: Column(
+            children: [
+              _appBar(context),
+              SizedBox(
+                height: 20,
               ),
-            )),
-        textWidget(text: "HAY Chat", fontSize: 25, fontWeight: FontWeight.bold),
-        Icon(Iconsax.setting),
-        Colors.transparent);
+              Expanded(
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        )),
+                    child: MessageList()),
+              )
+            ],
+          ),
+        ));
   }
 
-  Widget _headBar(BuildContext context) {
-    return Center(
-      child: Container(
-        width: Get.width,
-        height: 50,
-        margin: EdgeInsets.only(
-          bottom: 20,
-          top: 20,
-        ),
-        child: Row(
-          children: [
-            Stack(
-              children: [
-                GestureDetector(
-                    onTap: () {
-                      controller.goProfile();
-                    },
-                    child: Container(
-                      height: 55,
-                      width: 55,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            spreadRadius: 5,
-                            blurRadius: 10,
-                            offset: const Offset(0, 1),
-                            color: Theme.of(context).splashColor,
-                          ),
-                        ],
-                        gradient: const LinearGradient(
-                            colors: [sgreen, blue],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight),
-                        shape: BoxShape.circle,
-                      ),
-                      child: controller.state.head_detail.value != null
-                          ? Icon(
-                              Icons.person,
-                              size: 30,
-                            )
-                          : Image.network(
-                              "${controller.state.head_detail.value.avatar}"),
-                    )),
-                Positioned(
-                    bottom: 3,
-                    right: 5,
-                    child: CircleAvatar(
-                      backgroundColor: Color.fromARGB(255, 128, 224, 17),
-                      radius: 6,
-                    ))
-              ],
+  Widget _appBar(BuildContext context) {
+    return Container(
+      child: Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: 15),
+            child: Container(
+              height: 55,
+              width: 55,
+              child: CachedNetworkImage(
+                imageUrl: controller.state.my_avatar.value,
+                imageBuilder: (context, ImageProvider) => CircleAvatar(
+                  radius: 25,
+                  backgroundImage: ImageProvider,
+                ),
+                errorWidget: (context, url, error) =>
+                    Icon(Iconsax.personalcard),
+              ),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    spreadRadius: 5,
+                    blurRadius: 10,
+                    offset: const Offset(0, 1),
+                    color: Theme.of(context).splashColor,
+                  ),
+                ],
+                gradient: const LinearGradient(
+                    colors: [sgreen, blue],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight),
+                shape: BoxShape.circle,
+              ),
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: textWidget(
+                text: "Messages", fontSize: 25, fontWeight: FontWeight.bold),
+          ),
+          Padding(
+              padding: EdgeInsets.only(left: 120),
+              child: IconButton(
+                  onPressed: () {
+                    controller.goProfile();
+                  },
+                  icon: Icon(Iconsax.setting))),
+        ],
       ),
     );
   }

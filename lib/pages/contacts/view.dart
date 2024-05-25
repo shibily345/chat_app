@@ -13,8 +13,8 @@ class ContactPage extends GetView<ContactController> {
       foregroundColor: Colors.black,
       elevation: 0,
       backgroundColor: Colors.transparent,
-      leading: Icon(Iconsax.arrow_left_1),
-      title: Text(
+      leading: const Icon(Iconsax.arrow_left_1),
+      title: const Text(
         "Contacts",
       ),
     );
@@ -26,7 +26,7 @@ class ContactPage extends GetView<ContactController> {
       backgroundColor: Colors.white,
       appBar: _buildAppBar(),
       body: Container(
-        child: ContactList(),
+        child: const ContactList(),
       ),
     );
   }

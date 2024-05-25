@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../values/radii.dart';
 
 Widget netImageCached(
@@ -14,8 +12,8 @@ Widget netImageCached(
   return CachedNetworkImage(
     imageUrl: url,
     imageBuilder: (context, imageProvider) => Container(
-      height: height.h,
-      width: width.w,
+      height: height,
+      width: width,
       margin: margin,
       decoration: BoxDecoration(
         borderRadius: Radii.k54pxRadius,

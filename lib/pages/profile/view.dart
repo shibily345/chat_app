@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hay_chat/common/store/user.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../common/colors.dart';
@@ -14,115 +15,85 @@ class ProfilePage extends GetView<ProfilePageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 250, 252, 251),
-              Color.fromARGB(255, 17, 172, 233),
-            ],
-            begin: const FractionalOffset(0.0, 1.0),
-            end: const FractionalOffset(1.0, 0.0),
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp),
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: buildAppar(
+        IconButton(
+          icon: Icon(
+            Iconsax.arrow_left_1,
+            size: 25,
+          ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+        textWidget(text: ''),
+        IconButton(
+          icon: Icon(
+            Iconsax.setting,
+            size: 25,
+          ),
+          onPressed: () {},
+        ),
+        Colors.transparent,
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: buildAppar(
-          IconButton(
-            icon: Icon(
-              Iconsax.arrow_left_1,
-              size: 25,
-            ),
-            onPressed: () {
-              Get.back();
-            },
+      body: ListView(
+        children: [
+          const SizedBox(
+            height: 10,
           ),
-          textWidget(text: ''),
-          IconButton(
-            icon: Icon(
-              Iconsax.setting,
-              size: 25,
-            ),
-            onPressed: () {},
+          _buildProfileDetiles(context),
+          const SizedBox(
+            height: 300,
           ),
-          Colors.transparent,
-        ),
-        body: ListView(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            _buildProfileDetiles(context),
-            const SizedBox(
-              height: 300,
-            ),
-            Container(
-                child: Center(
-                    child: SpButton(context, title: "Logout", onPressed: () {
-              Get.defaultDialog(
-                  title: "Sre you Sure to log out?",
-                  content: Container(),
-                  onConfirm: controller.goLogout,
-                  textConfirm: "Yes",
-                  textCancel: "No");
-            })))
-          ],
-        ),
+          Container(
+              child: Center(
+                  child: SpButton(context, title: "Logout", onPressed: () {
+            Get.defaultDialog(
+                title: "Log out?",
+                content: Container(),
+                onConfirm: controller.goLogout,
+                textConfirm: "Yes",
+                textCancel: "No");
+          })))
+        ],
       ),
     );
   }
 
   Widget _buildProfileDetiles(BuildContext context) {
     return Center(
-      child: BlurContainer(
-          context,
-          200,
-          380,
-          Row(
+      child: Container(
+          margin: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Theme.of(context).splashColor,
+            borderRadius: BorderRadius.circular(18),
+          ),
+          height: 150,
+          width: 380,
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      height: 100,
-                      width: 100,
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [sgreen, blue],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight),
-                        shape: BoxShape.circle,
-                      ),
-                      child: controller.state.Profile_pic.value.avatar == null
-                          ? const Icon(
-                              Icons.person,
-                              size: 70,
-                            )
-                          : CachedNetworkImage(
-                              imageUrl:
-                                  controller.state.Profile_pic.value.avatar!,
-                              imageBuilder: (context, ImageProvider) =>
-                                  CircleAvatar(
-                                radius: 25,
-                                backgroundImage: ImageProvider,
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Iconsax.man),
-                            ),
+                child: Container(
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                      Theme.of(context).splashColor,
+                      Theme.of(context).scaffoldBackgroundColor
+                    ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                    shape: BoxShape.circle,
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: controller.state.my_avatar.value,
+                    imageBuilder: (context, ImageProvider) => CircleAvatar(
+                      radius: 25,
+                      backgroundImage: ImageProvider,
                     ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: GestureDetector(
-                        child: const CircleAvatar(
-                          radius: 18,
-                          child: Icon(Iconsax.camera),
-                        ),
-                      ),
-                    ),
-                  ],
+                    errorWidget: (context, url, error) =>
+                        Icon(Iconsax.personalcard),
+                  ),
                 ),
               ),
               Container(
@@ -132,7 +103,7 @@ class ProfilePage extends GetView<ProfilePageController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     textWidget(
-                      text: 'Mohamed Shibily',
+                      text: controller.state.my_name.value,
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
                     ),
@@ -140,7 +111,7 @@ class ProfilePage extends GetView<ProfilePageController> {
                       height: 10,
                     ),
                     textWidget(
-                      text: 'Modesty Brings Happy ',
+                      text: controller.state.my_description.value,
                       fontSize: 16,
                       fontWeight: FontWeight.w300,
                     ),

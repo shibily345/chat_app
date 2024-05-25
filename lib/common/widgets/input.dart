@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../values/colors.dart';
 import '../values/radii.dart';
 
@@ -21,8 +19,8 @@ Widget inputTextEdit({
   ValueChanged<String>? onchanged,
 }) {
   return Container(
-    height: height.h,
-    margin: EdgeInsets.only(top: marginTop.h),
+    height: height,
+    margin: EdgeInsets.only(top: marginTop),
     decoration: BoxDecoration(
       color: AppColors.secondaryElement,
       borderRadius: Radii.k6pxRadius,
@@ -43,7 +41,7 @@ Widget inputTextEdit({
       style: TextStyle(
         color: AppColors.primaryText,
         fontWeight: FontWeight.w400,
-        fontSize: 16.sp,
+        fontSize: 16,
       ),
       maxLines: 1,
       textAlign: textAlign ?? TextAlign.start,
@@ -66,8 +64,8 @@ Widget inputTextAreaEdit({
   ValueChanged<String>? onchanged,
 }) {
   return Container(
-    height: 100.h,
-    margin: EdgeInsets.only(top: marginTop.h),
+    height: 100,
+    margin: EdgeInsets.only(top: marginTop),
     decoration: BoxDecoration(
       color: AppColors.secondaryElement,
       borderRadius: Radii.k6pxRadius,
@@ -85,7 +83,7 @@ Widget inputTextAreaEdit({
       style: TextStyle(
         color: AppColors.primaryText,
         fontWeight: FontWeight.w400,
-        fontSize: 16.sp,
+        fontSize: 16,
       ),
       maxLines: 3,
       autocorrect: false, // 自动纠正
@@ -106,8 +104,8 @@ Widget inputEmailEdit({
   bool autofocus = false,
 }) {
   return Container(
-    height: 44.h,
-    margin: EdgeInsets.only(top: marginTop.h),
+    height: 44,
+    margin: EdgeInsets.only(top: marginTop),
     decoration: BoxDecoration(
       color: AppColors.primaryBackground,
       borderRadius: Radii.k6pxRadius,
@@ -135,7 +133,7 @@ Widget inputEmailEdit({
         color: AppColors.primaryText,
         fontFamily: "Avenir",
         fontWeight: FontWeight.w400,
-        fontSize: 18.sp,
+        fontSize: 18,
       ),
       maxLines: 1,
       autocorrect: false, // 自动纠正

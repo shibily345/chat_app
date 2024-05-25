@@ -11,6 +11,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:hay_chat/common/colors.dart';
 import 'package:hay_chat/common/values/colors.dart';
 import 'package:hay_chat/common/widgets/image.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../common/widgets.dart';
 import 'controller.dart';
@@ -20,160 +21,186 @@ class ChatPage extends GetView<ChatController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: _buildAppBar(),
-        body: Obx(
-          () => SafeArea(
-            child: Stack(children: [
-              ChatList(),
-              Positioned(
-                bottom: 20,
-                left: 25,
-                child: Container(
-                  width: Get.width,
-                  // color: blue,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: _buildAppBar(),
+      body: Obx(
+        () => SafeArea(
+          child: Stack(children: [
+            ChatList(),
+            Positioned(
+              bottom: 20,
+              left: 25,
+              child: SizedBox(
+                width: Get.width,
+                // color: blue,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    AnimatedContainer(
+                        duration: Duration(
+                            milliseconds:
+                                300), // Adjust animation duration as needed
+                        curve: Curves.easeInOut,
                         decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.9),
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(color: gray),
                         ),
-                        width: Get.width * 0.75,
-                        height: 45,
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                              child: Container(
-                                  color: Colors.white.withOpacity(0.2),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        padding:
-                                            EdgeInsets.only(top: 10, left: 10),
-                                        width: Get.width * 0.6,
-                                        child: TextField(
-                                          cursorColor: black,
-                                          controller: controller.textController,
-                                          decoration: InputDecoration(
-                                              hintText: 'Message...',
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent))),
-                                          autofocus: false,
-                                          keyboardType: TextInputType.multiline,
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      IconButton(
-                                        onPressed: () {
-                                          controller.sendMessage();
-                                        },
-                                        icon: Icon(Iconsax.send_2),
-                                      ),
-                                    ],
-                                  )),
-                            )),
-                      ),
-                      IconButton(
-                          padding: EdgeInsets.only(
-                            left: 20,
-                          ),
-                          onPressed: () {
-                            controller.goMore();
-                          },
-                          icon: Icon(
-                            Iconsax.clipboard,
-                            size: 35,
-                          )),
-                    ],
-                  ),
+                        padding: EdgeInsets.only(left: 10),
+                        width: 300,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SizedBox(
+                              width: Get.width * 0.58,
+                              child: TextFormField(
+                                // autofocus: true,
+                                //  focusNode: serchFocus,
+                                controller: controller.textController,
+                                style: TextStyle(
+                                    color: Theme.of(context).indicatorColor),
+                                // controller: nameController,
+                                decoration: InputDecoration(
+                                    hintStyle: TextStyle(
+                                        color: Theme.of(context)
+                                            .indicatorColor
+                                            .withOpacity(0.2)),
+                                    hintText: 'Hai...',
+                                    border: InputBorder.none),
+                                keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                              ),
+                            ),
+                            Spacer(),
+                            IconButton(
+                              onPressed: () {
+                                controller.sendMessage();
+                              },
+                              icon: Icon(Iconsax.send_2),
+                            ),
+                          ],
+                        )),
+                    controller.textController.text.isEmpty
+                        ? IconButton(
+                            padding: EdgeInsets.only(
+                              left: 20,
+                            ),
+                            onPressed: () {
+                              controller.goMore();
+                            },
+                            icon: Icon(
+                              Iconsax.clipboard,
+                              size: 35,
+                            ))
+                        : SizedBox(),
+                  ],
                 ),
               ),
-              controller.state.more_status.value
-                  ? Positioned(
-                      right: 20,
-                      bottom: 70,
-                      height: 280,
-                      width: 40,
-                      child: Column(
-                        children: [
-                          BuildaddIcons(
-                            onPressed: () {
-                              controller.imageFromGallery();
-                              // Get.back();
-                            },
-                            icon: Iconsax.folder_open,
-                          ),
-                          BuildaddIcons(
-                            onPressed: () {},
-                            icon: Iconsax.camera,
-                          ),
-                          BuildaddIcons(
-                            onPressed: () {
-                              controller.goVoiceCall();
-                            },
-                            icon: Iconsax.call_add,
-                          ),
-                          BuildaddIcons(
-                            onPressed: () {
-                              controller.goVideoCall();
-                            },
-                            icon: Iconsax.video,
-                          ),
-                          BuildaddIcons(
-                            onPressed: () {},
-                            icon: Iconsax.musicnote,
-                          ),
-                        ],
-                      ))
-                  : Container(),
-            ]),
-          ),
+            ),
+            controller.state.more_status.value
+                ? Positioned(
+                    right: 20,
+                    bottom: 70,
+                    height: 280,
+                    width: 40,
+                    child: Column(
+                      children: [
+                        BuildaddIcons(
+                          onPressed: () {
+                            controller.imageFromGallery();
+                            // Get.back();
+                          },
+                          icon: Iconsax.folder_open,
+                        ),
+                        BuildaddIcons(
+                          onPressed: () {},
+                          icon: Iconsax.camera,
+                        ),
+                        BuildaddIcons(
+                          onPressed: () {
+                            controller.goVoiceCall();
+                          },
+                          icon: Iconsax.call_add,
+                        ),
+                        BuildaddIcons(
+                          onPressed: () {
+                            controller.goVideoCall();
+                          },
+                          icon: Iconsax.video,
+                        ),
+                        BuildaddIcons(
+                          onPressed: () {},
+                          icon: Iconsax.musicnote,
+                        ),
+                      ],
+                    ))
+                : Container(),
+          ]),
         ),
       ),
     );
   }
 
   AppBar _buildAppBar() {
-    return buildAppar(
-        IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(Iconsax.arrow_left_1)), Obx(() {
-      return textWidget(text: "${controller.state.to_name}", fontSize: 20);
-    }),
+    return AppBar(
+      foregroundColor: Colors.black,
+      elevation: 0,
+      backgroundColor: Colors.white,
+      leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(Iconsax.arrow_left_1)),
+      title: Obx(() {
+        return textWidget(
+            text: controller.token != controller.state.to_token.value
+                ? controller.state.to_name.value
+                : controller.state.from_name.value,
+            fontSize: 20);
+      }),
+      actions: [
         Stack(
           children: [
-            CircleAvatar(
-              child: CachedNetworkImage(
-                imageUrl: controller.state.to_avatar.value,
-                imageBuilder: (context, ImageProvider) => CircleAvatar(
-                  radius: 25,
-                  backgroundImage: ImageProvider,
-                ),
-                errorWidget: (context, url, error) => Icon(Iconsax.man),
+            CachedNetworkImage(
+              imageUrl: controller.token != controller.state.to_token.value
+                  ? controller.state.to_avatar.value
+                  : controller.state.from_avatar.value,
+              height: 40,
+              width: 40,
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(image: imageProvider)),
               ),
-              radius: 22,
+              placeholder: (context, url) => Shimmer.fromColors(
+                baseColor: const Color.fromARGB(255, 225, 221, 221),
+                highlightColor: const Color.fromARGB(255, 254, 252, 252),
+                child: Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.black),
+                ),
+              ),
+              errorWidget: (context, url, error) => Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 220, 219, 219),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(Icons.person),
+              ),
             ),
-            controller.state.to_online == "1"
+            controller.state.to_online == "0"
                 ? Positioned(
-                    bottom: 8,
-                    right: 2,
+                    bottom: 0,
+                    right: 0,
                     child: Container(
-                      height: 14,
-                      width: 14,
+                      height: 40,
+                      width: 40,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: green,
+                          color: Colors.transparent,
                           border: Border.all(
-                            color: white,
+                            color: green,
                             width: 2,
                           )),
                     ),
@@ -181,7 +208,11 @@ class ChatPage extends GetView<ChatController> {
                 : Container()
           ],
         ),
-        Colors.white);
+        SizedBox(
+          width: 20,
+        )
+      ],
+    );
   }
 }
 

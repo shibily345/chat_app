@@ -6,6 +6,7 @@ import 'package:hay_chat/common/apis/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hay_chat/common/colors.dart';
 import 'package:hay_chat/common/entities/user.dart';
 import 'package:hay_chat/common/routes/names.dart';
 import 'package:hay_chat/common/store/user.dart';
@@ -57,11 +58,14 @@ class SignInController {
     // print(respones);
 
     EasyLoading.show(
-        indicator: const CircularProgressIndicator(),
-        maskType: EasyLoadingMaskType.clear,
+        indicator: const CircularProgressIndicator(
+          color: white,
+        ),
+        maskType: EasyLoadingMaskType.none,
         dismissOnTap: true);
     var result = await UserAPI.Login(params: loginRequestEntity);
-    if (result.code == 0) {
+    print(result.data);
+    if (result.code == 1) {
       await UserStore.to.saveProfile(result.data!);
       EasyLoading.dismiss();
     } else {

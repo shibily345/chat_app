@@ -5,11 +5,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:hay_chat/common/apis/apis.dart';
 import 'package:hay_chat/common/entities/entities.dart';
-import 'package:hay_chat/common/routes/names.dart';
 import 'package:hay_chat/common/store/store.dart';
 import 'package:hay_chat/pages/contacts/state.dart';
-
-import '../../common/entities/contact.dart';
 
 class ContactController extends GetxController {
   ContactController();
@@ -24,7 +21,20 @@ class ContactController extends GetxController {
   }
 
   Future<void> goChat(ContactItem contactItem) async {
-    var from_messages = await db
+    EasyLoading.show();
+    print(
+        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${contactItem.token}");
+    var fromMessages = await db
+        .collection("message")
+        .withConverter(
+          fromFirestore: Msg.fromFirestore,
+          toFirestore: (Msg msg, options) => msg.toFirestore(),
+        )
+        .where("from_token", isEqualTo: contactItem.token)
+        .where("to_token", isEqualTo: token)
+        .get();
+
+    var toMessages = await db
         .collection("message")
         .withConverter(
           fromFirestore: Msg.fromFirestore,
@@ -33,20 +43,11 @@ class ContactController extends GetxController {
         .where("from_token", isEqualTo: token)
         .where("to_token", isEqualTo: contactItem.token)
         .get();
-    print("..........from_messages ${from_messages.docs.isEmpty}");
+    EasyLoading.dismiss();
 
-    var to_messages = await db
-        .collection("message")
-        .withConverter(
-          fromFirestore: Msg.fromFirestore,
-          toFirestore: (Msg msg, options) => msg.toFirestore(),
-        )
-        .where("from_token", isEqualTo: token)
-        .where("to_token", isEqualTo: token)
-        .get();
-    print("..........to_messages ${to_messages.docs.isEmpty}");
-
-    if (from_messages.docs.isEmpty && to_messages.docs.isEmpty) {
+    if (fromMessages.docs.isEmpty && toMessages.docs.isEmpty) {
+      print(
+          "~~~~~~~~~~~~~~~~~~~~~~CREATING NEW~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${contactItem.token}");
       var profile = UserStore.to.profile;
       var msgdata = Msg(
         from_token: profile.token,
@@ -63,45 +64,52 @@ class ContactController extends GetxController {
         last_time: Timestamp.now(),
         msg_num: 0,
       );
-      var doc_id = await db
+      var docId = await db
           .collection("message")
           .withConverter(
               fromFirestore: Msg.fromFirestore,
               toFirestore: (Msg msg, options) => msg.toFirestore())
           .add(msgdata);
       Get.toNamed("/chat", parameters: {
-        "doc_id": doc_id.id,
+        "doc_id": docId.id,
         "to_token": contactItem.token ?? "",
         "to_name": contactItem.name ?? "",
         "to_avatar": contactItem.avatar ?? "",
         "to_online": contactItem.online.toString(),
       });
       print('.........user saved..........');
+    }
+    if (fromMessages.docs.isNotEmpty) {
+      print(
+          "..........send message---------------- ${fromMessages.docs.first.id}");
+      Get.toNamed("/chat", parameters: {
+        "doc_id": fromMessages.docs.first.id,
+        "to_token": contactItem.token ?? "",
+        "to_name": contactItem.name ?? "",
+        "to_avatar": contactItem.avatar ?? "",
+        "to_online": contactItem.online.toString(),
+        // "from_name": msg.from_name ?? "",
+        // "msg_from": msg.msg_from ?? "",
+        // "from_avatar": msg.from_avatar ?? "",
+        // "from_online": msg.from_online.toString(),
+      });
     } else {
-      if (from_messages.docs.isNotEmpty) {
-        Get.toNamed("/chat", parameters: {
-          "doc_id": from_messages.docs.first.id,
-          "to_token": contactItem.token ?? "",
-          "to_name": contactItem.name ?? "",
-          "to_avatar": contactItem.avatar ?? "",
-          "to_online": contactItem.online.toString(),
-        });
-      }
-      if (to_messages.docs.isNotEmpty) {
-        Get.toNamed("/chat", parameters: {
-          "doc_id": to_messages.docs.first.id,
-          "to_token": contactItem.token ?? "",
-          "to_name": contactItem.name ?? "",
-          "to_avatar": contactItem.avatar ?? "",
-          "to_online": contactItem.online.toString(),
-        });
-      }
+      print(
+          "..........recived message---------------- ${toMessages.docs.first.id}");
+
+      Get.toNamed("/chat", parameters: {
+        "doc_id": toMessages.docs.first.id,
+        "to_token": contactItem.token ?? "",
+        "to_name": contactItem.name ?? "",
+        "to_avatar": contactItem.avatar ?? "",
+        "to_online": contactItem.online.toString(),
+      });
     }
   }
 
   asyncLoadAllData() async {
     EasyLoading.show(
-      indicator: CircularProgressIndicator(),
+      indicator: const CircularProgressIndicator(),
       maskType: EasyLoadingMaskType.clear,
       dismissOnTap: true,
     );

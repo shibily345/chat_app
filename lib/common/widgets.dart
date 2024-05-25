@@ -14,7 +14,7 @@ Widget textWidget(
     Color color = Colors.black}) {
   return Text(
     text,
-    overflow: TextOverflow.clip,
+    overflow: TextOverflow.ellipsis,
     style: GoogleFonts.firaSans(
       fontSize: fontSize,
       fontWeight: fontWeight,
@@ -32,8 +32,8 @@ Widget SpButton(
     onTap: () => onPressed(),
     child: Container(
       margin: const EdgeInsets.only(top: 10),
-      height: 50,
-      width: 150,
+      height: 35,
+      width: 100,
       decoration: BoxDecoration(
         // boxShadow: [
         //   BoxShadow(
@@ -42,11 +42,12 @@ Widget SpButton(
         //     color: Theme.of(context).splashColor,
         //   ),
         // ],
-        gradient: const LinearGradient(
-            colors: [sgreen, blue],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight),
-        borderRadius: BorderRadius.circular(30),
+        // gradient: const LinearGradient(
+        //     colors: [sgreen, blue],
+        //     begin: Alignment.topLeft,
+        //     end: Alignment.bottomRight),
+        color: black.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Center(
         child: textWidget(

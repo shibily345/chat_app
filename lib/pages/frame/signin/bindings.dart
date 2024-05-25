@@ -7,6 +7,6 @@ class SignInBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<SignInController>(() => SignInController());
-    Get.lazyPut<MessageController>(() => MessageController());
+  //  Get.lazyPut<MessageController>(() => MessageController());
   }
 }

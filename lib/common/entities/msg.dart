@@ -14,6 +14,7 @@ class Msg {
   final String? last_msg;
   final Timestamp? last_time;
   final int? msg_num;
+  final String? msg_from;
 
   Msg({
     this.from_token,
@@ -29,12 +30,13 @@ class Msg {
     this.last_msg,
     this.last_time,
     this.msg_num,
+    this.msg_from,
   });
 
   factory Msg.fromFirestore(
-      DocumentSnapshot<Map<String, dynamic>> snapshot,
-      SnapshotOptions? options,
-      ) {
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
     final data = snapshot.data();
     return Msg(
       from_token: data?['from_token'],
@@ -50,6 +52,7 @@ class Msg {
       last_msg: data?['last_msg'],
       last_time: data?['last_time'],
       msg_num: data?['msg_num'],
+      msg_from: data?['msg_from'],
     );
   }
 
@@ -68,6 +71,7 @@ class Msg {
       if (last_msg != null) "last_msg": last_msg,
       if (last_time != null) "last_time": last_time,
       if (msg_num != null) "msg_num": msg_num,
+      if (msg_from != null) "msg_from": msg_from,
     };
   }
 }

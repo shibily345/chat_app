@@ -7,5 +7,9 @@ class ChatState {
   var to_name = "".obs;
   var to_avatar = "".obs;
   var to_online = "".obs;
+  var from_name = "".obs;
+  var from_avatar = "".obs;
+  var from_online = "".obs;
+  var msg_from = "".obs;
   RxBool more_status = false.obs;
 }

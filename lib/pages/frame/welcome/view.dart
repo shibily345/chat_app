@@ -10,39 +10,38 @@ import 'controller.dart';
 class WelcomePage extends GetView<WelcomeController> {
   const WelcomePage({super.key});
   Widget _buildPageTitle(String title) {
-    return Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                  'assets/bwbg1.png',
-                ))),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 100,
-                child: SvgPicture.asset(
-                  'assets/HAYlogo.svg',
-                ),
-              ),
-              Text(
-                title,
-                style: const TextStyle(
-                    color: Colors.grey,
-                    fontFamily: "Montserrat",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 45),
-              ),
-            ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: Get.height * 0.4,
           ),
-        ));
+          SizedBox(
+            height: 90,
+            child: SvgPicture.asset(
+              'assets/HAYlogo.svg',
+            ),
+          ),
+          const SizedBox(
+            height: 280,
+          ),
+          textWidget(text: "From"),
+          SizedBox(
+            height: 30,
+            child: SvgPicture.asset(
+              'assets/C-logo.svg',
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: white,
       body: Container(
         child: _buildPageTitle(controller.title),
       ),

@@ -7,17 +7,17 @@ class UserAPI {
     LoginRequestEntity? params,
   }) async {
     var response = await HttpUtil().post(
-      'api/login',
+      'api/v1/auth/login',
       queryParameters: params?.toJson(),
     );
     return UserLoginResponseEntity.fromJson(response);
   }
 
-  static Future<UserLoginResponseEntity> get_profile() async {
+  static Future<UserItem> get_profile() async {
     var response = await HttpUtil().post(
-      'api/get_profile',
+      'api/v1/chat/user',
     );
-    return UserLoginResponseEntity.fromJson(response);
+    return UserLoginResponseEntity.fromJson(response).data!;
   }
 
   static Future<BaseResponseEntity> UpdateProfile({

@@ -28,60 +28,58 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  agora_rtc_engine: ^6.1.0
-  cached_network_image: ^3.2.3
-  cloud_firestore: ^4.4.2
-  cookie_jar: ^3.0.1
-  crypto: ^3.0.2
-  cupertino_icons: ^1.0.2
-  device_info_plus: ^8.1.0
-  dio: ^5.0.1
-  dio_cookie_manager: ^2.1.0
-  dots_indicator: ^2.1.0
-  extension: ^0.6.0
-  firebase_auth: ^4.2.8
-  firebase_core: ^2.6.1
-  firebase_in_app_messaging: ^0.7.0+13
-  firebase_messaging: ^14.2.4
-  firebase_storage: ^11.0.13
+  agora_rtc_engine: null
+  cached_network_image: ^3.3.1
+  cloud_firestore: null
+  cookie_jar: null
+  crypto: null
+  cupertino_icons: null
+  device_info_plus: null
+  dio: null
+  dio_cookie_manager: null
+  dots_indicator: null
+  extension: null
+  firebase_analytics: ^10.8.5
+  firebase_auth: null
+  firebase_core: null
+  firebase_in_app_messaging: null
+  firebase_messaging: null
+  firebase_storage: null
   flutter:
     sdk: flutter
-  flutter_cache_manager: ^3.3.0
-  flutter_cupertino_localizations: ^1.0.1
-  flutter_easyloading: ^3.0.3
-  flutter_icons_plus: ^1.0.3
-  flutter_launcher_icons: ^0.12.0
-  flutter_local_notifications: ^13.0.0
-  flutter_screenutil: ^5.6.1
-  flutter_spinkit: ^5.1.0
-  flutter_svg: ^2.0.1
-  flutter_verification_code: ^1.1.6
-  fluttertoast: ^8.1.3
-  get: ^4.6.5
-  google_fonts: ^4.0.3
-  google_sign_in: ^5.4.4
-  icons_plus: ^4.0.0
-  iconsax: ^0.0.8
-  image_picker: ^0.8.6+1
-  intl: ^0.17.0
-  just_audio: ^0.9.31
-  loading_animation: ^0.0.1
-  location: ^4.4.0
-  package_info_plus: ^3.0.3
-  path_provider: ^2.0.12
-  permission_handler: ^10.2.0
-  photo_view: ^0.14.0
-  pull_to_refresh: ^2.0.0
-  rolling_bottom_bar: ^0.2.2
-  sentry: ^6.20.1
-  share_plus: ^6.3.1
-  shared_preferences: ^2.0.17
-  sqflite: ^2.2.4+1
-  uni_links: ^0.5.1
-  webview_flutter: ^4.0.2
+  flutter_cache_manager: null
+  flutter_easyloading: null
+  flutter_icons_plus: null
+  flutter_launcher_icons: null
+  flutter_local_notifications: ^16.3.2
+  flutter_spinkit: null
+  flutter_svg: null
+  flutter_verification_code: null
+  fluttertoast: null
+  get: null
+  google_fonts: null
+  google_sign_in: null
+  icons_plus: null
+  iconsax: null
+  image_picker: null
+  intl: null
+  just_audio: null
+  package_info_plus: null
+  path_provider: null
+  permission_handler: null
+  photo_view: null
+  pull_to_refresh: null
+  rolling_bottom_bar: null
+  sentry: null
+  share_plus: null
+  shared_preferences: null
+  shimmer: ^3.0.0
+  sqflite: null
+  uni_links: null
+  webview_flutter: null
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
+  flutter_lints: null
   flutter_test:
     sdk: flutter
 flutter_icons:

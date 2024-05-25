@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:hay_chat/common/apis/apis.dart';
 import 'package:hay_chat/common/routes/names.dart';
 import 'package:hay_chat/common/store/storage.dart';
 
-import '../apis/user.dart';
 import '../entities/user.dart';
 import '../values/storage.dart';
 
@@ -43,9 +43,9 @@ class UserStore extends GetxController {
   //  profile
   Future<String> getProfile() async {
     if (token.isEmpty) return "";
-    // var result = await UserAPI.profile();
-    // _profile(result);
-    // _isLogin.value = true;
+    var result = await UserAPI.get_profile();
+    _profile(result);
+    _isLogin.value = true;
     return StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
   }
 

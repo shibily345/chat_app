@@ -13,4 +13,5 @@ class VideoCallState {
   var to_avatar = "".obs;
   var doc_id = "".obs;
   var call_role = "audience".obs;
+  var channelId = "".obs;
 }

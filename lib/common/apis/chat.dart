@@ -9,7 +9,7 @@ class ChatAPI {
   static Future<BaseResponseEntity> bind_fcmtoken(
       {BindFcmTokenRequestEntity? params}) async {
     var response = await HttpUtil().post(
-      'api/bind_fcmtoken',
+      'api/v1/chat/bindfcm',
       queryParameters: params?.toJson(),
     );
     return BaseResponseEntity.fromJson(response);
@@ -18,7 +18,7 @@ class ChatAPI {
   static Future<BaseResponseEntity> call_notifications(
       {CallRequestEntity? params}) async {
     var response = await HttpUtil().post(
-      'api/send_notice',
+      'api/v1/chat/send_notice',
       queryParameters: params?.toJson(),
     );
     return BaseResponseEntity.fromJson(response);
@@ -27,7 +27,7 @@ class ChatAPI {
   static Future<BaseResponseEntity> call_token(
       {CallTokenRequestEntity? params}) async {
     var response = await HttpUtil().post(
-      'api/get_rtc_token',
+      'api/v1/chat/getRtc',
       queryParameters: params?.toJson(),
     );
     return BaseResponseEntity.fromJson(response);
@@ -36,7 +36,7 @@ class ChatAPI {
   static Future<BaseResponseEntity> send_message(
       {ChatRequestEntity? params}) async {
     var response = await HttpUtil().post(
-      'api/message',
+      'api/v1/chat/message',
       queryParameters: params?.toJson(),
     );
     return BaseResponseEntity.fromJson(response);
@@ -52,7 +52,7 @@ class ChatAPI {
       ),
     });
     var response = await HttpUtil().post(
-      'api/upload_photo',
+      'api/v1/chat/upload_photo',
       data: data,
     );
     return BaseResponseEntity.fromJson(response);
@@ -61,7 +61,7 @@ class ChatAPI {
   static Future<SyncMessageResponseEntity> sync_message(
       {SyncMessageRequestEntity? params}) async {
     var response = await HttpUtil().post(
-      'api/sync_message',
+      'api/v1/chat/sync_message',
       queryParameters: params?.toJson(),
     );
     return SyncMessageResponseEntity.fromJson(response);
